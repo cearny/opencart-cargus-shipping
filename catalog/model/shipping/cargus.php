@@ -6,12 +6,10 @@ class ModelShippingCargus extends Model {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country where country_id = '" . (int)$address['country_id'] . "' and name='Romania'");
         $status = !!$query->num_rows;
 
-        if (!$status)
-            return array();
+        if (!$status) return array();
 
         // No need to do anything *at all* if there are no products in the cart
-        if (!$this->cart->hasProducts())
-            return array();
+        if (!$this->cart->hasProducts()) return array();
 
         // Now, get the currency value multiplier, since our Cargus-provided currency is always in RON.
         $query_currency_multiplier = $this->db->query("SELECT COALESCE(value, 1.0) AS value FROM " . DB_PREFIX . "currency WHERE code = 'RON' LIMIT 0, 1");
@@ -129,8 +127,7 @@ class ModelShippingCargus extends Model {
 
         // If we couldn't match a city name, return with an error
         // TODO: Also try searching by postal code
-        if ($destination_city_id == -1)
-            return array();
+        if ($destination_city_id == -1) return array();
         
         $post_data = array(
             'cod_client' => $client_code,
@@ -195,8 +192,7 @@ class ModelShippingCargus extends Model {
         $total_including_vat = (float)$matches[0];
 
         // A zero shipping cost means an error in the provided data
-        if ($total_excluding_vat == 0.0 || $total_including_vat)
-            return array();
+        if ($total_excluding_vat == 0.0 || $total_including_vat == 0.0) return array();
 
         // Now, multiply to the correct currency on display
         // TODO: Are we sure this is right, how can we check what currency is on display now in OpenCart? Is there a $session[] var?
