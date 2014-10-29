@@ -118,7 +118,7 @@ class ModelShippingCargus extends Model {
         $payer_id = 1;
 
         // TODO: Make this work in a later version of PHP.
-        $clean_city_name = mysql_real_escape_string(strtoupper($address['city']));
+        $clean_city_name = $this->db->escape(strtoupper($address['city']));
         $query_id_localitate = $this->db->query("SELECT * FROM " . DB_PREFIX . "cargus_zone_city_mapping WHERE zone_id = " .(int)$address['zone_id']. " AND city = '" .$clean_city_name. "' LIMIT 0, 1");
 
         // Try and match the city name to our list of city codes
