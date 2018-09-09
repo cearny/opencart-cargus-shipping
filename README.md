@@ -1,5 +1,7 @@
 OpenCart module for calculating shipping costs when using Cargus
 
+> Note this repository is well and truly abandoned.
+
 ## Getting started
 
 The module requires a custom table to be present in the database, called `(prefix)cargus_zone_city_mapping` - this table holds the city codes and Cargus shipping center codes for all the cities in which Cargus operates in Romania, mapped to OpenCart zone ID values.
@@ -24,6 +26,6 @@ One current limitation is that the destination city name must match a city name 
 Another limitation is that I don't think the correct shipping rates are given when calculating just shipping estimates, since OpenCart doesn't require the user to provide a city name and the postal code is optional (and 
 not currently searched against by the module).
 
-##License
+## License
 
 MIT license - [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)
